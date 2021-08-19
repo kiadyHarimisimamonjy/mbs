@@ -48,7 +48,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>MBS</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Zaho Fo Zaha </b></span>
+                <span class="logo-lg"><b>MBS Transport</b></span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->

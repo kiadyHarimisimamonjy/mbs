@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Itinerary extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'arrival', 'leaving',
+        'foreigner', 'national',
+        'name'
+    ];
 }
