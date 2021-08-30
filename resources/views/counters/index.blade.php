@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Products</h2>
+                <h2>Guichets</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('counters.create') }}">Nouveau</a>
@@ -24,13 +24,15 @@
     <table class="table table-bordered">
         <tr>
             <th>Id</th>
-            <th>ville</th>
+            <th>Ville</th>
+            <th>Nom</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($counters as $counter)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ $counter->city }}</td>
+            <td>{{ $counter->city }}</td>
+            <td>{{ $counter->name }}</td>
 	        <td>
                 <form action="{{ route('counters.destroy',$counter->id) }}" method="POST">
                     <a class="btn btn-primary" href="{{ route('counters.edit',$counter->id) }}">Edit</a>

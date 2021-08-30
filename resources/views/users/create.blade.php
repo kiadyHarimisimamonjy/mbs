@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.theme')
 
 
 @section('content')
+<div class="content-header">
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -11,6 +12,7 @@
             <a class="btn btn-primary" href="{{ route('users.index') }}"> Retour</a>
         </div>
     </div>
+</div>
 </div>
 
 

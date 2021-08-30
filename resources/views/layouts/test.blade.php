@@ -51,24 +51,37 @@
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
               <i class="fas fa-user"></i>
-              <span>  {{ Auth::user()->name }} </span>
+              <span>profile</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-
-
-
+              <div class="user-panel mt-3 pb-3 ">
+                <div class="image">
+                  <img src="http://mbs.test/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                  <a href="#" class=" text-dark">Alexander Pierce</a>
+                </div>
+              </div>
 
 
               <div class="dropdown-divider"></div>
 
-              <a  href="{{ route('logout') }}" onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();" class="dropdown-item">
-                <i class="fas fa-power-off mr-2"></i>       {{ __('Deconnexion') }}
+
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-tools mr-2"></i> Parametre de Profile
               </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+
+
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-ellipsis-h mr-2"></i> Autres
+              </a>
+
+              <div class="dropdown-divider"></div>
+
+              <a href="../../../login/index.html" class="dropdown-item">
+                <i class="fas fa-power-off mr-2"></i> Deconexion
+              </a>
             </div>
           </li>
 
@@ -164,34 +177,6 @@
 
                 </ul>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <!-- <i class="nav-icon fas fa-copy"></i> -->
-                  <p>
-                    Voyages
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('travels.create') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Ajouter un Voyage</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('travels.index') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>
-                        Liste des Voyages
-                      </p>
-                    </a>
-                  </li>
-
-                </ul>
-              </li>
-
 
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -280,6 +265,33 @@
                 </ul>
               </li>
 
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <!-- <i class="nav-icon fas fa-copy"></i> -->
+                  <p>
+                    Voyages
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="../../pages/voyage/ajouter_voyage.php" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Ajouter un Voyage</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="../../pages/voyage/liste_voyage.php" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>
+                        Liste des Voyages
+                      </p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
 
 
 
@@ -323,14 +335,12 @@
 
 
 
-<div class="content-wrapper">
+
 
 
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
-
         <!-- /.content-wrapper -->
-    </div>
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> beta 0.3
@@ -383,6 +393,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="http://mbs.test/dist/js/demo.js"></script>
     <!-- Page specific script -->
+
+
 
 
 

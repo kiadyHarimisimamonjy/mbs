@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNameToItineraries extends Migration
+class AddNamesToCounters extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddNameToItineraries extends Migration
      */
     public function up()
     {
-        Schema::table('itineraries', function (Blueprint $table) {
+        Schema::table('counters', function (Blueprint $table) {
             $table->string('name');
         });
     }
@@ -25,7 +25,7 @@ class AddNameToItineraries extends Migration
      */
     public function down()
     {
-        Schema::table('itineraries', function (Blueprint $table) {
+        Schema::table('counters', function (Blueprint $table) {
             //
         });
     }

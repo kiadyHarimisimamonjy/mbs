@@ -15,6 +15,7 @@ class CreateItinerariesTable extends Migration
     {
         Schema::create('itineraries', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('leaving');
             $table->string('arrival');
             $table->integer('national');
