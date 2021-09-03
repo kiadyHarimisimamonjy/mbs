@@ -19,7 +19,8 @@ class CreateTravelTable extends Migration
             $table->date('date');
             $table->foreignId('boat_id')->constrained()->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->unsignedBigInteger('itenerary_id')->nullable();
+            $table->foreignId('itinerary_id')->constrained()->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')
             ->onDelete('cascade');
             $table->boolean('canceled')->default(0);

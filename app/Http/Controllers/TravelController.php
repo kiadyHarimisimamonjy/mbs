@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Boat;
 use App\Models\Travel;
+use App\Rules\DateCheck;
 use App\Models\Itinerary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TravelController extends Controller
 {
@@ -14,8 +16,23 @@ class TravelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $itineraries = Itinerary::where('show','>', 0)->get();
+       $inputs=  $request->all();
+       $travettemp= Travel::where('id','>', 0);
+     if( $request->input('itinerary') and $request->input('itinerary') !=='all' ){
+        $travettemp = $travettemp->where('itinerary_id','=', $request->input('itinerary'));
+       }
+       if( $request->input('debut')){
+        $travettemp = $travettemp->where('date','>=', $request->input('debut'));
+       }
+       if( $request->input('fin')){
+        $travettemp = $travettemp->where('date','<=', $request->input('fin'));
+       }
+        $travels = $travettemp->paginate(5);
+        return view('travels.index',compact('travels','inputs','itineraries'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
 
@@ -39,13 +56,16 @@ class TravelController extends Controller
      */
     public function store(Request $request)
     {
+
         request()->validate([
-            'name' => 'required',
+            'user_id' => 'required',
             'boat_id' => 'required',
+            'canceled' => 'required',
+            'date' =>['required',new DateCheck] ,
+            'hour' => 'required',
+            'itinerary_id' => 'required',
         ]);
-
-        Travel::create($request->all());
-
+       Travel::create($request->all());
         return redirect()->route('travels.index')
                         ->with('success','Place created successfully.');
     }

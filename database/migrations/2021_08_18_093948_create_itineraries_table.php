@@ -20,6 +20,8 @@ class CreateItinerariesTable extends Migration
             $table->string('arrival');
             $table->integer('national');
             $table->integer('foreigner');
+            $table->integer('show');
+            $table->integer('parent');
             $table->timestamps();
         });
     }
