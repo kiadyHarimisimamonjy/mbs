@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Itinerary;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -10,6 +12,7 @@ class Travel extends Model
 {
     protected $table = 'Travels';
     use HasFactory;
+
     protected $fillable = [
 
         'hour', 'date',
@@ -17,10 +20,49 @@ class Travel extends Model
         'itinerary_id','canceled'
 
     ];
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
     public function itinerary()
     {
         return $this->belongsTo(Itinerary::class);
     }
+    public static function getTravels(Request $request)
+    {
+        $travettemp= Travel::where('id','>', 0);
+        if( $request->input('itinerary') and $request->input('itinerary') !=='all' ){
+           $travettemp = $travettemp->where('itinerary_id','=', $request->input('itinerary'));
+          }
+          if( $request->input('boat') and $request->input('boat') !=='all' ){
+            $travettemp = $travettemp->where('boat_id','=', $request->input('boat'));
+           }
+          if( $request->input('debut')){
+           $travettemp = $travettemp->where('date','>=', $request->input('debut'));
+          }
+          if( $request->input('fin')){
+           $travettemp = $travettemp->where('date','<=', $request->input('fin'));
+          }
+           $travels = $travettemp->orderBy('date', 'DESC')->paginate(5);
+        return $travels;
+    }
+
+    public  function getEnablePlaceTravel()
+    {
+        $reservations= $this->reservations()->where('canceled','0')->get();
+        $data=[];
+        $i=0;
+        foreach($reservations as $reservation){
+           $busies= Customer::where('reservation_id', $reservation['id'])->get();
+           foreach($busies as $busy){
+            $data[$i]=$busy['place_id'];
+            $i++;
+           }
+        }
+
+        return Place::whereNotIn('id',$data)->get();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\CounterController;
 use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TravelController;
 use Illuminate\Routing\Route as RoutingRoute;
 
@@ -41,5 +42,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('places', PlaceController::class);
     Route::resource('counters', CounterController::class);
     Route::resource('boats', BoatController::class);
+    Route::resource('reservations', ReservationController::class);
+    Route::get('/placedisponible', [ReservationController::class, 'getEnablePlaceTravel']);
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/voyages', [ReservationController::class, 'getTravelsItinerary'])->middleware('auth');

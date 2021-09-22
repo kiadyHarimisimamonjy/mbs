@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Modifier Place</h2>
+                <h2>Edit Product</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('places.index') }}"> Retour</a>
+                <a class="btn btn-primary" href="{{ route('products.index') }}"> Retour</a>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
     @endif
 
 
-    <form action="{{ route('places.update',$place->id) }}" method="POST">
+    <form action="{{ route('products.update',$product->id) }}" method="POST">
     	@csrf
         @method('PUT')
 
@@ -34,28 +34,14 @@
          <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Nom:</strong>
-		            <input type="text" name="name" value="{{ $place->name }}" class="form-control" placeholder="Name">
+		            <strong>Name:</strong>
+		            <input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Name">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Bateau:</strong>
-
-
-                    <select class="form-control select2" name="boat_id" style="width: 100%;">
-                        @foreach ( $boats as   $boat)
-                        @php
-                        $selected = 'value='.$boat->id;
-                    if($place->boat->id ==  $boat->id )    // Any Id
-                    {
-                        $selected .= 'selected="selected"';
-                    }
-                    @endphp
-                        <option  {{ $selected}}>{{ $boat->name}}</option>
-                        @endforeach
-
-                      </select>
+		            <strong>Detail:</strong>
+		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</textarea>
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -15,4 +15,12 @@ class Place extends Model
     {
         return $this->belongsTo(Boat::class);
     }
+    public function reservations()
+    {
+        return $this->belongsToMany(Reservation::class,'customers');
+    }
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }

@@ -31,7 +31,7 @@
 	    @foreach ($places as $place)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ $place->name }}</td>
+	        <td>numero {{ $place->name }}</td>
 	        <td>{{ $place->boat->name }}</td>
 	        <td>
                 <form action="{{ route('places.destroy',$place->id) }}" method="POST">

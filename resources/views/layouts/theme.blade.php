@@ -10,26 +10,26 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/fontawesome-free/css/all.min.css">
     <!-- daterange picker -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/daterangepicker/daterangepicker.css">
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="http://mbs.test/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Bootstrap4 Duallistbox -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
     <!-- BS Stepper -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/bs-stepper/css/bs-stepper.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/bs-stepper/css/bs-stepper.min.css">
     <!-- dropzonejs -->
-    <link rel="stylesheet" href="http://mbs.test/plugins/dropzone/min/dropzone.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="http://mbs.test/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-boxed">
@@ -204,13 +204,13 @@
 
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../../pages/reservation/nouvelle_reservation.php" class="nav-link">
+                  <a href="{{route('reservations.create') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Nouvelle Reservation</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../pages/reservation/liste_reservation.php" class="nav-link">
+                    <a href="{{route('reservations.index') }}"  class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Liste des Reservations </p>
                     </a>
@@ -356,35 +356,41 @@
 
 
     <!-- jQuery -->
-    <script src="http://mbs.test/plugins/jquery/jquery.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="http://mbs.test/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Select2 -->
-    <script src="http://mbs.test/plugins/select2/js/select2.full.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/select2/js/select2.full.min.js"></script>
     <!-- Bootstrap4 Duallistbox -->
-    <script src="http://mbs.test/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
     <!-- InputMask -->
-    <script src="http://mbs.test/plugins/moment/moment.min.js"></script>
-    <script src="http://mbs.test/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/moment/moment.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- date-range-picker -->
-    <script src="http://mbs.test/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- bootstrap color picker -->
-    <script src="http://mbs.test/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
-    <script src="http://mbs.test/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Bootstrap Switch -->
-    <script src="http://mbs.test/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
     <!-- BS-Stepper -->
-    <script src="http://mbs.test/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/bs-stepper/js/bs-stepper.min.js"></script>
     <!-- dropzonejs -->
-    <script src="http://mbs.test/plugins/dropzone/min/dropzone.min.js"></script>
+    <script src="http://127.0.0.1:8000/plugins/dropzone/min/dropzone.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="http://mbs.test/dist/js/adminlte.min.js"></script>
+    <script src="http://127.0.0.1:8000/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="http://mbs.test/dist/js/demo.js"></script>
+    <script src="http://127.0.0.1:8000/dist/js/demo.js"></script>
     <!-- Page specific script -->
+    @if (isset($js) )
 
+    @foreach($js as $script)
+    <script src="http://127.0.0.1:8000/js/{{ $script}}.js"></script>
 
+    @endforeach
+
+    @endif
 
 
 </body>

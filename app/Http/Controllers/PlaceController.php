@@ -12,9 +12,9 @@ class PlaceController extends CrudController
 
     public function index()
     {
-        $places = Place::latest()->paginate(2);
+        $places = Place::latest()->paginate(5);
         return view('places.index',compact('places'))
-            ->with('i', (request()->input('page', 1) - 1) * 2);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

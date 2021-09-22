@@ -2,16 +2,44 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
+    public static function getTravelForUser()
+    {
+        $travel=null;
+        $traveltemp=Travel::where('date','>=', date("Y-m-d"));
+         if(Auth::user()->counter_id===0){
+           return  $traveltemp ->orderBy('date', 'asc')->get();
+         }
+         else{
+            $itineraryForUsers=User::getItineraryForUser();
+            $traveltemp= $traveltemp->where('itinerary_id',  $itineraryForUsers[0]->id);
+            for ($i = 1; $i < count($itineraryForUsers); $i++) {
+                $traveltemp= $traveltemp->orWhere('itinerary_id',  $itineraryForUsers[$i]->id);
+            }
+            return $traveltemp ->orderBy('date', 'asc')->get();
 
+         }
+
+        return  $travel;
+    }
+    public static function getItineraryForUser()
+    {
+        if(Auth::user()->counter_id===0){
+            return Itinerary::all();
+          }
+        $city=Counter:: where('id',Auth::user()->counter_id)->first('city');
+        return Itinerary::where('leaving',$city->city)->get();
+
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -41,4 +69,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }

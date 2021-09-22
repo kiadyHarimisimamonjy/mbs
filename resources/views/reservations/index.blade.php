@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <div class="search row pb-2">
-                                <form action="{{ route('travels.index') }}" method="GET">
+                                <form action="{{ route('reservations.index') }}" method="GET">
                                      <b> <button class="btn btn-info" type="submit"><i class="fa fa-search fa-fw"></i> Recherche</button> </b>
 
                                         <select class="form-control col col-md-2 mx-2" name="itinerary" >
@@ -37,12 +37,8 @@
                                             <option value=" {{$itinerary->id}}"  >{{ $itinerary->name}}</option>
                                             @endforeach
                                         </select>
-                                        <select class="form-control col col-md-2 mx-2" name="boat" >
-                                            <option value="all">tous</option>
-                                            @foreach ( $boats as   $boat)
-                                            <option value=" {{$boat->id}}"  >{{ $boat->name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text"  name="nom" placeholder="nom" class="form-control col col-md-2 mx-2" >
+
 
 
                                           <input type="date"  name="debut" placeholder="debut" class="form-control col col-md-2 mx-2" >
@@ -57,38 +53,24 @@
                                 <tr>
                                     <th>Num</th>
                                     <th>Destination</th>
-                                    <th>Bateau</th>
-                                    <th>Depart</th>
-                                    <th>Cree par</th>
-                                    <th>Etat</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Places</th>
+                                    <th>Guichtier</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($travels as $travel)
+                                @foreach ($reservations as $reservation)
                                 <tr>
-                                    <td>{{ $travel->id }}</td>
-                                    <td>{{ $travel->itinerary->name }}</td>
-                                    <td>{{ $travel->boat->name }}</td>
+                                    <td>{{ $reservation->id }}</td>
+                                    <td>{{ $reservation->itinerary->name }}</td>
+                                    <td>{{ $reservation->customer}}</td>
                                     <td>{{
-                                    date('d-m-Y', strtotime($travel->date))}} {{ $travel->hour }}</td>
-                                    <td>{{ $travel->user->name }}</td>
-                                    <td class="no-print">
-                                        @if (date("Y-m-d") >$travel->date)
-                                             @if ( $travel->canceled===1)
-                                            annule definitif
-                                            @else
-                                              acheve
-                                            @endif
+                                    date('d-m-Y', strtotime($reservation->created_at))}} </td>
+                                    <td>{{ $reservation->number }}</td>
+                                    <td>{{ $reservation->user->name }}</td>
 
-                                        @else
-                                            @if ( $travel->canceled===1)
-                                            annule
-                                            @else
-                                               en cours
-                                            @endif
-                                        @endif
-                                    </td>
                                     <td>
                                         <div class="btn btn-primary " title="modifier">
                                         <i class="nav-icon fas fa-edit">voir</i>
@@ -97,7 +79,7 @@
                               </tr>
                               @endforeach
                             <tfoot>
-                                {!! $travels->links() !!}</tfoot>
+                                {!! $reservations->links() !!}</tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -116,7 +98,7 @@
 <!-- /.content -->
 
 
-    {!! $travels->links() !!}
+    {!! $reservations->links() !!}
 
 
 @endsection

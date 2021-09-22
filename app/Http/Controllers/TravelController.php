@@ -19,19 +19,10 @@ class TravelController extends Controller
     public function index(Request $request)
     {
         $itineraries = Itinerary::where('show','>', 0)->get();
-       $inputs=  $request->all();
-       $travettemp= Travel::where('id','>', 0);
-     if( $request->input('itinerary') and $request->input('itinerary') !=='all' ){
-        $travettemp = $travettemp->where('itinerary_id','=', $request->input('itinerary'));
-       }
-       if( $request->input('debut')){
-        $travettemp = $travettemp->where('date','>=', $request->input('debut'));
-       }
-       if( $request->input('fin')){
-        $travettemp = $travettemp->where('date','<=', $request->input('fin'));
-       }
-        $travels = $travettemp->paginate(5);
-        return view('travels.index',compact('travels','inputs','itineraries'))
+        $boats= Boat::where('enable','1')->get();
+       $travels= Travel::getTravels( $request);
+      // dd($travels);
+        return view('travels.index',compact('travels','boats','itineraries'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
