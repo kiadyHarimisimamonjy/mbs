@@ -48,7 +48,6 @@
 
                                 </form>
                             </div>
-
                             <thead>
                                 <tr>
                                     <th>Num</th>
@@ -56,7 +55,6 @@
                                     <th>Client</th>
                                     <th>Date</th>
                                     <th>Places</th>
-                                    <th>Guichtier</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -69,17 +67,15 @@
                                     <td>{{
                                     date('d-m-Y', strtotime($reservation->created_at))}} </td>
                                     <td>{{ $reservation->number }}</td>
-                                    <td>{{ $reservation->user->name }}</td>
 
                                     <td>
-                                        <div class="btn btn-primary " title="modifier">
+                                        <a class="btn btn-primary" href="{{ route('reservations.show',$reservation->id) }}">
                                         <i class="nav-icon fas fa-edit">voir</i>
-                                         </div>
+                                        </a>
                                     </td>
                               </tr>
                               @endforeach
-                            <tfoot>
-                                {!! $reservations->links() !!}</tfoot>
+
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -94,11 +90,12 @@
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
+    {!! $reservations->links('pagination::bootstrap-4') !!}
 </section>
 <!-- /.content -->
 
 
-    {!! $reservations->links() !!}
+
 
 
 @endsection

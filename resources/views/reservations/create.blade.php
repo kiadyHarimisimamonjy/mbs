@@ -12,7 +12,7 @@
                         <div class="col-sm-4">
                             <h1>Nouvelle Reservation</h1>
                         </div>
-                        
+
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
@@ -21,7 +21,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                    
+
                         <div class="col-12">
                             <!-- Default box -->
                             <div class="card">
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="card-body">
                         <div id="error" class="col-12" class="alert alert-danger">
-                            <strong>remlpissez le Formulaire dans l'ordre</strong> 
+                            <strong>remlpissez le Formulaire dans l'ordre</strong>
                         </div>
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
@@ -50,7 +50,7 @@
 
                                     <div class="row pt-3 m-0 ">
                                         <div class="col-4">
-                                            <label for="prix" class="form-label fs-6 fw-bolder align-text-center">
+                                            <label for="placeDisponibe" class="form-label fs-6 fw-bolder align-text-center">
                                                 <img src="" alt=""> Place Restant
                                             </label>
                                             <input readonly type="text" id='placeDisponibe'
@@ -60,7 +60,7 @@
 
                                         </div>
                                         <div class="col-4">
-                                            <label for="prix" class="form-label fs-6 fw-bolder align-text-center">
+                                            <label for="total" class="form-label fs-6 fw-bolder align-text-center">
                                                 <img src="" alt=""> Net a payee
                                             </label>
                                             <input readonly type="text" id='total'

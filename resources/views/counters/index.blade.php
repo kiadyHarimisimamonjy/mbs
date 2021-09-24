@@ -48,7 +48,7 @@
     </table>
 
 
-    {!! $counters->links() !!}
+    {!! $counters->links('pagination::bootstrap-4') !!}
 
 
 @endsection

@@ -30,7 +30,7 @@ class CreateReservationsTable extends Migration
             $table->integer('number');
             $table->integer('total');
             $table->string('tarification');
-            $table->boolean('ispaid')->default(1);
+            $table->boolean('ispaid')->default(0);
             $table->boolean('canceled')->default(0);
             $table->timestamps();
         });

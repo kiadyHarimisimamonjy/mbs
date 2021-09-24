@@ -97,7 +97,7 @@
                               </tr>
                               @endforeach
                             <tfoot>
-                                {!! $travels->links() !!}</tfoot>
+                                {!! $travels->links('pagination::bootstrap-4') !!}</tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -116,7 +116,6 @@
 <!-- /.content -->
 
 
-    {!! $travels->links() !!}
 
 
 @endsection

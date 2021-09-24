@@ -23,4 +23,8 @@ class Place extends Model
     {
         return $this->hasMany(Customer::class);
     }
+    public function paiements()
+    {
+        return $this->hasMany(Paiement::class);
+    }
 }

@@ -48,7 +48,7 @@
     </table>
 
 
-    {!! $places->links() !!}
+    {!! $places->links('pagination::bootstrap-4') !!}
 
 
 @endsection

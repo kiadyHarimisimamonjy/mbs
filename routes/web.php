@@ -43,6 +43,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('counters', CounterController::class);
     Route::resource('boats', BoatController::class);
     Route::resource('reservations', ReservationController::class);
+    Route::get('/reservations/{id}/editPaid', [ReservationController::class, 'editPaid'])
+    ->name('reservations.editPaid');;
+    Route::put('/reservations/{id}/paid', [ReservationController::class, 'paid'])
+    ->name('reservations.paid');;
     Route::get('/placedisponible', [ReservationController::class, 'getEnablePlaceTravel']);
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

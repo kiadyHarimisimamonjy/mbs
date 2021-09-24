@@ -53,7 +53,7 @@
     </table>
 
 
-    {!! $boats->links() !!}
+    {!! $boats->links('pagination::bootstrap-4') !!}
 
 
 

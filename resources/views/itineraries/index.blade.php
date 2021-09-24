@@ -54,7 +54,7 @@
     </table>
 
 
-    {!! $itineraries->links() !!}
+    {!! $itineraries->links('pagination::bootstrap-4') !!}
 
 
 @endsection

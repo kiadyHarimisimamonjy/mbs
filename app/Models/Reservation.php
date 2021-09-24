@@ -51,12 +51,13 @@ class Reservation extends Model
     {
         return $this->belongsTo(Itinerary::class);
     }
-    public function places()
-    {
-        return $this->belongsToMany(Place::class,'customers');
-    }
+
     public function customers()
     {
         return $this->hasMany(Customer::class);
+    }
+    public function paiements()
+    {
+        return $this->hasMany(Paiement::class);
     }
 }
