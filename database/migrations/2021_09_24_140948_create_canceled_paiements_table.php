@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaiementsTable extends Migration
+class CreateCanceledPaiementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePaiementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paiements', function (Blueprint $table) {
+        Schema::create('canceled_paiements', function (Blueprint $table) {
             $table->id();
             $table->integer('montant')->default(0);
             $table->string('mode')->default('caisse');
@@ -21,6 +21,7 @@ class CreatePaiementsTable extends Migration
             ->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->string('motif')->default('sans motif');
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreatePaiementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paiements');
+        Schema::dropIfExists('canceled_paiements');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Boat;
+use App\Models\CanceledPaiement;
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Travel;
@@ -14,6 +15,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Rules\MontantValidation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -101,6 +103,7 @@ class ReservationController extends Controller
             if($data['action']==='saveandpaid'){
                 $paiedata=array('montant'=>$data['info']['total']);
                 $paiement = new Paiement($paiedata);
+                $paiement->user_id=Auth::user()->id;
                 $paiement->reservation()->associate($reservation);
                 $paiement->save();
              }
@@ -127,12 +130,55 @@ class ReservationController extends Controller
         $travel= $reservation->travel;
         $itinerary= $reservation->itinerary;
         $paiements= $reservation->paiements;
+        $canceledpaiements= $reservation->canceledpaiements;
 
         $sumpaid = array_sum(array_column(json_decode(json_encode($paiements), true),
         'montant'));
          $unpaid= $reservation->total-$sumpaid;
-        return view('reservations.show',compact('unpaid','sumpaid','itinerary','reservation','customers',
+        return view('reservations.show',compact('unpaid','canceledpaiements','sumpaid','itinerary','reservation','customers',
         'user','travel','paiements'));
+    }
+    public function print( $idreservation)
+    {
+        $reservation = Reservation::find( $idreservation);
+        $placenb=count($reservation->customers) ;
+        $user= $reservation->user;
+        $travel= $reservation->travel;
+        $itinerary= $reservation->itinerary;
+        $paiements= $reservation->paiements;
+
+        $sumpaid = array_sum(array_column(json_decode(json_encode($paiements), true),
+        'montant'));
+         $unpaid= $reservation->total-$sumpaid;
+        return view('ticket',compact('unpaid','itinerary',
+        'reservation','placenb',
+        'travel'));
+    }
+    public function canceled( $idreservation)
+    {
+
+        DB::beginTransaction();
+        try {
+            $reservation = Reservation::find( $idreservation);
+            $reservation->canceled = 1;
+            $reservation->user_id=Auth::user()->id;
+            $reservation->save();
+            $paiements= $reservation->paiements;
+            $sumpaid = array_sum(array_column(json_decode(json_encode($paiements), true),
+            'montant'));
+            $paiedata=array('montant'=>$sumpaid);
+            $cpaiement = new CanceledPaiement($paiedata);
+            $cpaiement->user_id=Auth::user()->id;
+            $cpaiement->reservation()->associate($reservation);
+            $cpaiement->save();
+            DB::commit();
+            return redirect()->route('reservations.index')
+            ->with('success','Annulation avec success');
+        }
+        catch (Exception $e) {
+            DB::rollBack();
+            return back()->withErrors($e->getMessage())->withInput();
+        }
     }
 /**
      * Show the form for editing the specified resource.
@@ -153,17 +199,19 @@ class ReservationController extends Controller
             $reservation->ispaid = 1;
             $reservation->save();
         }
+
         $paiedata=array('montant'=>$request->input('montant'));
         $paiement = new Paiement($paiedata);
+        $paiement->user_id=Auth::user()->id;
         $paiement->reservation()->associate($reservation);
         $paiement->save();
         DB::commit();
         return redirect()->route('reservations.index')
-        ->with('success','Itinerary updated successfully');
+        ->with('success','Paiement avec success');
     }
     catch (Exception $e) {
         DB::rollBack();
-       return back()->withErrors('Verifiez bien le montant insere SVP')->withInput();
+        return back()->withErrors('Verifiez bien le montant insere SVP')->withInput();
     }
         //
     }

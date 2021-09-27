@@ -60,4 +60,8 @@ class Reservation extends Model
     {
         return $this->hasMany(Paiement::class);
     }
+    public function canceledpaiements()
+    {
+        return $this->hasMany(CanceledPaiement::class);
+    }
 }

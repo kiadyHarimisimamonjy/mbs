@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\BoatController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\TravelController;
 use App\Http\Controllers\CounterController;
 use App\Http\Controllers\ItineraryController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\TravelController;
 use Illuminate\Routing\Route as RoutingRoute;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,8 +47,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/reservations/{id}/editPaid', [ReservationController::class, 'editPaid'])
     ->name('reservations.editPaid');;
     Route::put('/reservations/{id}/paid', [ReservationController::class, 'paid'])
-    ->name('reservations.paid');;
+    ->name('reservations.paid');
+    Route::put('/reservations/{id}/canceled', [ReservationController::class, 'canceled'])
+    ->name('reservations.canceled');
+    ;
     Route::get('/placedisponible', [ReservationController::class, 'getEnablePlaceTravel']);
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/voyages', [ReservationController::class, 'getTravelsItinerary'])->middleware('auth');
+Route::get('generate-pdf', [PDFController::class, 'generatePDF'])
+->name('generate.pdf');
+Route::get('/reservations/{id}/print', [ReservationController::class, 'print'])
+->name('reservations.print');
