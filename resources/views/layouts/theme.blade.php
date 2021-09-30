@@ -231,13 +231,13 @@
 
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../../pages/depense/demande_depense.php" class="nav-link">
+                    <a href="{{ route('depenses.create') }}"class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Demande de depense </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../pages/depense/liste.php" class="nav-link">
+                    <a href="{{ route('depenses.index') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Liste des Depenses </p>
                     </a>

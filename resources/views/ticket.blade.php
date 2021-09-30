@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="window.print(); "  class="hold-transition sidebar-fixed">
+<body onload="printticket(); "  class="hold-transition sidebar-fixed">
   <div class="wrapper">
 
 
@@ -100,7 +100,14 @@
 
   </div>
   <!-- ./wrapper -->
-
+  <script>
+    function printticket() {
+        window.print();
+        setTimeout(function () {
+            window.location.href="/reservations/";
+        }, 100);
+    }
+  </script>
 
 </body>
 

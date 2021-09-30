@@ -189,8 +189,10 @@
                         <!-- /.card-body -->
                         <div class="card-footer col-12 justify-content-right">
                             <button onclick="submit('save')" class="btn btn-success">Enregistrer</button>
-
+                            @if (!$isadmin)
                             <button onclick="submit('saveandpaid')" class="btn btn-danger">Enregistrer et Payer</button>
+
+                            @endif
 
                             <a href="{{ route('home') }}" > <button  class="btn btn-secondary">Annuler</button></a>
 

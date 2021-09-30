@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaiementsTable extends Migration
+class CreateActionDepensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreatePaiementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paiements', function (Blueprint $table) {
+        Schema::create('action_depenses', function (Blueprint $table) {
             $table->id();
             $table->integer('montant')->default(0);
-            $table->string('mode')->default('caisse');
-            $table->foreignId('reservation_id')->constrained()->onUpdate('cascade')
-            ->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreignId('counter_id')->constrained()->onUpdate('cascade')
+            $table->foreignId('depense_id')->constrained()->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->string('commentaire')->default('');
+            $table->string('action')->default('en attente');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ class CreatePaiementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paiements');
+        Schema::dropIfExists('action_depenses');
     }
 }

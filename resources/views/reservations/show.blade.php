@@ -197,10 +197,10 @@
                         <a  target="_blank" href="{{ route('reservations.print',$reservation->id) }}"
                         class="btn m-2 btn-info">Print</a>
 
-                             @if ($unpaid>0 && $reservation->canceled===0)
+                             @if ($unpaid>0 && $reservation->canceled===0 && !$isadmin)
                              <a  href="{{ route('reservations.editPaid',$reservation->id) }}" class="btn m-2 btn-success">Payer</a>
                              @endif
-                             @if ($reservation->canceled===0 && $travel->date>=date("Y-m-d") )
+                             @if ($reservation->canceled===0 && $travel->date>=date("Y-m-d") && !$isadmin)
                              <form action="{{ route('reservations.canceled',$reservation->id) }}" method="POST">
                              @csrf
                              @method('PUT')

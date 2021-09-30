@@ -12,6 +12,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
+    public static function isAdmin()
+    {
+        $roles= json_decode(Auth::user()->roles);
+       $keys = array_column($roles, 'name');
+       return !(array_search('Admin', $keys)===false);
+
+    }
     public static function getTravelForUser()
     {
         $travel=null;
@@ -33,7 +40,7 @@ class User extends Authenticatable
     }
     public static function getItineraryForUser()
     {
-        if(Auth::user()->counter_id===0){
+        if( User::isAdmin()){
             return Itinerary::all();
           }
         $city=Counter:: where('id',Auth::user()->counter_id)->first('city');

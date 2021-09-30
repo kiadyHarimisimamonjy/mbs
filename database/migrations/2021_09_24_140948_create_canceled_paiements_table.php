@@ -21,6 +21,8 @@ class CreateCanceledPaiementsTable extends Migration
             ->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->foreignId('counter_id')->constrained()->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string('motif')->default('sans motif');
             $table->timestamps();
         });

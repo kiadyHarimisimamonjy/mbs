@@ -9,9 +9,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\CounterController;
+use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\ItineraryController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\ReservationController;
+use App\Models\Depense;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('depenses', DepenseController::class);
     Route::resource('itineraries', ItineraryController::class);
     Route::resource('travels', TravelController::class);
     Route::resource('places', PlaceController::class);
@@ -50,7 +53,8 @@ Route::group(['middleware' => ['auth']], function() {
     ->name('reservations.paid');
     Route::put('/reservations/{id}/canceled', [ReservationController::class, 'canceled'])
     ->name('reservations.canceled');
-    ;
+    Route::put('/depenses/{id}/action', [DepenseController::class, 'action'])
+    ->name('depenses.action');
     Route::get('/placedisponible', [ReservationController::class, 'getEnablePlaceTravel']);
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

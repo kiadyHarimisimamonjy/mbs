@@ -28,17 +28,21 @@
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <div class="search row pb-2">
-                                <form action="{{ route('reservations.index') }}" method="GET">
+                                <form action="{{ route('depenses.index') }}" method="GET">
                                      <b> <button class="btn btn-info" type="submit"><i class="fa fa-search fa-fw"></i> Recherche</button> </b>
 
-                                        <select class="form-control col col-md-2 mx-2" name="itinerary" >
+                                        <select class="form-control col col-md-2 mx-2" name="etat" >
                                             <option value="all">tous</option>
-                                            @foreach ( $itineraries as   $itinerary)
-                                            <option value=" {{$itinerary->id}}"  >{{ $itinerary->name}}</option>
-                                            @endforeach
+                                            <option >en attente</option>
+                                            <option >approuvee</option>
+                                            <option >approuvee et modifiee</option>
+                                            <option >refusee</option>
                                         </select>
+
+                                        @if ($isadmin)
                                         <input type="text"  name="nom" placeholder="nom" class="form-control col col-md-2 mx-2" >
 
+                                        @endif
 
 
                                           <input type="date"  name="debut" placeholder="debut" class="form-control col col-md-2 mx-2" >
@@ -50,28 +54,34 @@
                             </div>
                             <thead>
                                 <tr>
-                                    <th>Num</th>
-                                    <th>Destination</th>
-                                    <th>Client</th>
+                                    <th>Etat</th>
+                                    <th>Demandeur</th>
+                                    <th>Montant</th>
                                     <th>Date</th>
-                                    <th>Places</th>
+                                    <th>Objet</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($reservations as $reservation)
+                                @foreach ($depenses as $depense)
                                 <tr>
-                                    <td>{{ $reservation->id }}</td>
-                                    <td>{{ $reservation->itinerary->name }}</td>
-                                    <td>{{ $reservation->customer}}</td>
+                                    <td>{{ $depense->etat }}</td>
+                                    <td>{{explode(' ', $depense->user->name)[0]  }}</td>
+                                    <td>{{ number_format($depense->montant, 0, ',', ' ')}} Ar</td>
                                     <td>{{
-                                    date('d-m-Y', strtotime($reservation->created_at))}} </td>
-                                    <td>{{ $reservation->number }}</td>
+                                    date('d-m-Y', strtotime($depense->created_at))}} </td>
+                                    <td>{{ substr($depense->commentaire , 0, 10)}}...</td>
 
                                     <td>
-                                        <a class="btn btn-primary" href="{{ route('reservations.show',$reservation->id) }}">
-                                        <i class="nav-icon fas fa-edit">voir</i>
+                                        <a class="btn btn-primary" href="{{ route('depenses.show',$depense->id) }}">
+                                       voir
                                         </a>
+                                        @if ( $depense->user_id===Auth::user()->id && $depense->etat==="en attente")
+                                        <a class="btn btn-success" href="{{ route('depenses.edit',$depense->id) }}">
+                                            modifier
+                                             </a>
+                                        @endif
+
                                     </td>
                               </tr>
                               @endforeach
@@ -90,7 +100,7 @@
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-    {!! $reservations->links('pagination::bootstrap-4') !!}
+    {!! $depenses->links('pagination::bootstrap-4') !!}
 </section>
 <!-- /.content -->
 

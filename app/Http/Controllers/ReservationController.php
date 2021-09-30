@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Boat;
-use App\Models\CanceledPaiement;
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Travel;
+use App\Models\Counter;
 use App\Models\Customer;
 use App\Models\Paiement;
 use App\Models\Itinerary;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Models\CanceledPaiement;
 use App\Rules\MontantValidation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -72,10 +73,11 @@ class ReservationController extends Controller
      */
     public function create()
     {
+        $isadmin = User::isAdmin();
         $itineraries=User::getItineraryForUser();
         $boats= Boat::where('enable','1')->get();
         $js=['reservation'];
-        return view('reservations.create',compact('itineraries','boats','js'));
+        return view('reservations.create',compact('itineraries','boats','isadmin','js'));
     }
 
     /**
@@ -104,11 +106,13 @@ class ReservationController extends Controller
                 $paiedata=array('montant'=>$data['info']['total']);
                 $paiement = new Paiement($paiedata);
                 $paiement->user_id=Auth::user()->id;
+                $counter= Counter:: where('id',Auth::user()->counter_id)->first('id');
+               $paiement->counter_id=$counter->id;
                 $paiement->reservation()->associate($reservation);
                 $paiement->save();
              }
              DB::commit();
-            return response()->json( array('ok'=>'success'),200);
+            return response()->json( $reservation,200);
         }
         catch (Exception $e) {
             DB::rollBack();
@@ -131,11 +135,11 @@ class ReservationController extends Controller
         $itinerary= $reservation->itinerary;
         $paiements= $reservation->paiements;
         $canceledpaiements= $reservation->canceledpaiements;
-
+        $isadmin = User::isAdmin();
         $sumpaid = array_sum(array_column(json_decode(json_encode($paiements), true),
         'montant'));
          $unpaid= $reservation->total-$sumpaid;
-        return view('reservations.show',compact('unpaid','canceledpaiements','sumpaid','itinerary','reservation','customers',
+        return view('reservations.show',compact('isadmin','unpaid','canceledpaiements','sumpaid','itinerary','reservation','customers',
         'user','travel','paiements'));
     }
     public function print( $idreservation)
@@ -169,6 +173,8 @@ class ReservationController extends Controller
             $paiedata=array('montant'=>$sumpaid);
             $cpaiement = new CanceledPaiement($paiedata);
             $cpaiement->user_id=Auth::user()->id;
+            $counter= Counter:: where('id',Auth::user()->counter_id)->first('id');
+            $cpaiement->counter_id=$counter->id;
             $cpaiement->reservation()->associate($reservation);
             $cpaiement->save();
             DB::commit();
@@ -203,6 +209,8 @@ class ReservationController extends Controller
         $paiedata=array('montant'=>$request->input('montant'));
         $paiement = new Paiement($paiedata);
         $paiement->user_id=Auth::user()->id;
+        $counter= Counter:: where('id',Auth::user()->counter_id)->first('id');
+       $paiement->counter_id=$counter->id;
         $paiement->reservation()->associate($reservation);
         $paiement->save();
         DB::commit();
@@ -211,7 +219,7 @@ class ReservationController extends Controller
     }
     catch (Exception $e) {
         DB::rollBack();
-        return back()->withErrors('Verifiez bien le montant insere SVP')->withInput();
+        return back()->withErrors($e->getMessage())->withInput();
     }
         //
     }

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Itinerary;
 use Exception;
+use App\Models\Itinerary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -49,7 +50,9 @@ class Travel extends Model
 
     public  function getEnablePlaceTravel()
     {
-        $reservations= $this->reservations()->where('canceled','0')->get();
+//DB::enableQueryLog();
+        $reservations= $this->reservations()->where('canceled',0)->get();
+      //  dd(DB::getQueryLog())  ;
         $data=[];
         $i=0;
         foreach($reservations as $reservation){
