@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <h1>Nouvelle Depense</h1>
+                    <h1>Report Voyage</h1>
                 </div>
 
             </div>
@@ -48,34 +48,22 @@
             <div class="card-body">
 
 
-            <form action="{{ route('depenses.store') }}" method="POST">
+            <form action="{{ route('travels.postponevalidate',$travel->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                @if ($isadmin)
-                <div class="col-12 x">
-                    <label for="counter" class="form-label">Caisse</label>
 
-                    <select class="form-control " id="counter" name="counter_id" >
-                        @foreach ( $counters as   $counter)
-                        <option value=" {{$counter->id}}"  >{{ $counter->name}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-
-                @endif
 
                <div class="col-12 x">
-                  <label for="montant" class="form-label">Montant</label>
-                  <input type="number" id="montant" name="montant" placeholder="en ariary"
+                  <label for="date" class="form-label">Date</label>
+               <input type="date" id="date" name="date" value="{{$travel->date}}"
                   class="form-control">
                 </div>
-                <div class="col-12">
-                  <!-- textarea -->
-                  <div class="form-group mt-3">
-                    <label>Description du Motif</label>
-                    <textarea class="form-control" name="commentaire" rows="3" placeholder="Enter ..."></textarea>
+                <div class="col-12 x">
+                    <label for="hour" class="form-label">Heure</label>
+                    <input type="time" id="hour" name="hour" value="{{$travel->hour}}"
+                    class="form-control">
                   </div>
-                </div>
                 <div class="col justify-content-right ">
 
                 </div>
@@ -86,7 +74,7 @@
             <div class="card-footer">
               <button class=" btn btn-primary " type=" submit">Envoyer</button>
 
-              <a href="{{ route('home') }}" > <button  class="btn btn-secondary">Annuler</button></a>
+              <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
 
             </div>
         </form>

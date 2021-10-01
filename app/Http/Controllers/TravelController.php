@@ -98,7 +98,8 @@ class TravelController extends Controller
      */
     public function postpone( $idtravel)
     {
-        //
+        $travel = Travel::find( $idtravel);
+        return view('travels.postpone',compact('travel'));
     }
     public function manifest(Travel $travel)
     {
@@ -113,7 +114,7 @@ class TravelController extends Controller
      */
     public function update(Request $request, Travel $travel)
     {
-        //
+
     }
 
     /**
@@ -125,6 +126,24 @@ class TravelController extends Controller
      */
     public function postponevalidate(Request $request,  $idtravel)
     {
+        try {
+        request()->validate([
+            'user_id' => 'required',
+            'date' =>['required',new DateCheck] ,
+            'hour' => 'required',
+        ]);
+        $travel = Travel::find( $idtravel);
+        $travel->user_id=$request->input('user_id');
+        $travel->date=$request->input('date');
+        $travel->hour=$request->input('hour');
+        $travel->save();
+        return redirect()->route('travels.index')
+        ->with('success','Annulation avec success');
+    }
+    catch (Exception $e) {
+
+        return back()->withErrors($e->getMessage())->withInput();
+    }
         //
     }
 

@@ -96,6 +96,8 @@
 @if (!$isadmin)
 
 <div class="row mt-3  justify-content-center">
+    <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
+
     <button type="submit" class="btn btn-danger">Submit</button>
   </div>
 @endif

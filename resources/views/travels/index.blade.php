@@ -92,7 +92,7 @@
                                         <a class="btn btn-primary" href="{{ route('travels.show',$travel->id) }}">
                                             voir
                                             </a>
-                                            @if (!(date("Y-m-d") >$travel->date))
+                                            @if (!(date("Y-m-d") >$travel->date) && $travel->canceled===0)
                                             <a class="btn btn-danger" href="{{ route('travels.postpone',$travel->id) }}">
                                                Reporte
                                                 </a>

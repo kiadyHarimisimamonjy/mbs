@@ -53,7 +53,7 @@ Route::group(['middleware' => ['auth']], function() {
     ->name('travels.manifest');
     Route::get('/travels/{id}/postpone', [TravelController::class, 'postpone'])
     ->name('travels.postpone');
-    Route::get('/travels/{id}/postponevalidate', [TravelController::class, 'postponevalidate'])
+    Route::put('/travels/{id}/postponevalidate', [TravelController::class, 'postponevalidate'])
     ->name('travels.postponevalidate');
     Route::get('/reservations/{id}/editPaid', [ReservationController::class, 'editPaid'])
     ->name('reservations.editPaid');;

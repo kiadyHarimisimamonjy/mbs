@@ -119,8 +119,8 @@
 
                                 <div
                                     class="row px-2 pt-1 m-0 align-items-center justify-content-space-between justify-content-center mt-2">
-                                    <button type="reset"
-                                        class="btn btn-secondary col-4  text-center fw-bolder mx-2">Annuler</button>
+                                    <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
+
 
 
                                         <button type="submit"

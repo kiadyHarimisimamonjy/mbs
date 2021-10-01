@@ -194,7 +194,7 @@
 
                             @endif
 
-                            <a href="{{ route('home') }}" > <button  class="btn btn-secondary">Annuler</button></a>
+                            <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
 
                         </div>
                         <!-- /.card-footer-->
