@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Boat;
+use App\Models\User;
 use App\Models\Travel;
 use App\Rules\DateCheck;
 use App\Models\Itinerary;
@@ -68,8 +70,13 @@ class TravelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Travel $travel)
+
     {
-        //
+        $isadmin = User::isAdmin();
+        $customers=$travel->activecustomers();
+        return view('travels.show',compact('travel','customers','isadmin'));
+       // ->with('i', (request()->input('page', 1) - 1) * 5);
+     //   dd($travel->reservationispaid());
     }
 
     /**
@@ -82,7 +89,21 @@ class TravelController extends Controller
     {
         //
     }
-
+  /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Travel  $travel
+     * @return \Illuminate\Http\Response
+     */
+    public function postpone( $idtravel)
+    {
+        //
+    }
+    public function manifest(Travel $travel)
+    {
+        //
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -94,6 +115,34 @@ class TravelController extends Controller
     {
         //
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Travel  $travel
+     * @return \Illuminate\Http\Response
+     */
+    public function postponevalidate(Request $request,  $idtravel)
+    {
+        //
+    }
+
+    public function canceled( $idtravel)
+    {    try {
+        $travel = Travel::find( $idtravel);
+        DB::transaction(function() use ($travel) {
+            $travel->canceled();
+        });
+        return redirect()->route('travels.index')
+        ->with('success','Annulation avec success');
+    }
+    catch (Exception $e) {
+
+        return back()->withErrors($e->getMessage())->withInput();
+    }
+    }
+
 
     /**
      * Remove the specified resource from storage.

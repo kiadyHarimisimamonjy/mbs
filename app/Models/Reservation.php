@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Counter;
 use Illuminate\Http\Request;
+use App\Models\CanceledPaiement;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -20,6 +23,22 @@ class Reservation extends Model
         'number'
 
     ];
+    public function canceled()
+    {
+        $this->canceled = 1;
+        $this->user_id=Auth::user()->id;
+        $this->save();
+         $paiements=$this->paiements;
+         $sumpaid = array_sum(array_column(json_decode(json_encode($paiements), true),
+         'montant'));
+         $paiedata=array('montant'=>$sumpaid);
+         $cpaiement = new CanceledPaiement($paiedata);
+         $cpaiement->user_id=Auth::user()->id;
+         $counter= Counter:: where('id',Auth::user()->counter_id)->first('id');
+         $cpaiement->counter_id=$counter->id;
+         $cpaiement->reservation()->associate($this);
+         $cpaiement->save();
+    }
     public static function getReservations(Request $request)
     {
         $reservationtemp= Reservation::where('id','>', 0);

@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Exception;
+use App\Models\Customer;
 use App\Models\Itinerary;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,6 +24,44 @@ class Travel extends Model
         'itinerary_id','canceled'
 
     ];
+    public function canceled()
+    {
+        $this->canceled = 1;
+        $this->user_id=Auth::user()->id;
+        $this->save();
+        $reservations=$this->reservations;
+        foreach(  $reservations as $reservation) $reservation->canceled();
+    }
+    public function activecustomers()
+    {
+        try{
+            $search=$this->id;
+            return Customer:: whereHas('reservation', function ($query) use ($search) {
+                $query->where('travel_id', $search )->where('canceled',0);
+        })->paginate(5);
+        }
+        catch (Exception $e) {
+           echo($e->getMessage()) ;
+        }
+
+    }
+    public function customers()
+    {
+        return $this->hasManyThrough(
+            Customer::class,
+            Reservation::class,
+            'travel_id', // Foreign key on the environments table...
+            'reservation_id', // Foreign key on the deployments table...
+            'id', // Local key on the projects table...
+            'id' // Local key on the environments table...
+        );
+    }
+    public function reservationispaid()
+    {
+
+         if(count( $this->reservations()->where('ispaid',0)->get())===0) return 'complet';
+        return'incomplet';
+        }
     public function reservations()
     {
         return $this->hasMany(Reservation::class);

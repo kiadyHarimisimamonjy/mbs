@@ -93,10 +93,13 @@
 
 
         </div>
+@if (!$isadmin)
 
-        <div class="row mt-3  justify-content-center">
-            <button type="submit" class="btn btn-danger">Submit</button>
-          </div>
+<div class="row mt-3  justify-content-center">
+    <button type="submit" class="btn btn-danger">Submit</button>
+  </div>
+@endif
+
     </form>
 
 </div>

@@ -35,7 +35,7 @@
                     <div class="card-header">
                         <div class="card-header">
                          Enregistre le
-                            <strong>{{$reservation->created_at}}</strong>
+                            <strong>{{   date('d-m-Y', strtotime($reservation->created_at))}}</strong>
                             <span class="float-right"> <strong>Status:
                                 @if ($reservation->canceled===1)
                                    annulle

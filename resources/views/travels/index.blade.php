@@ -55,7 +55,6 @@
 
                             <thead>
                                 <tr>
-                                    <th>Num</th>
                                     <th>Destination</th>
                                     <th>Bateau</th>
                                     <th>Depart</th>
@@ -67,16 +66,16 @@
                             <tbody>
                                 @foreach ($travels as $travel)
                                 <tr>
-                                    <td>{{ $travel->id }}</td>
                                     <td>{{ $travel->itinerary->name }}</td>
                                     <td>{{ $travel->boat->name }}</td>
                                     <td>{{
                                     date('d-m-Y', strtotime($travel->date))}} {{ $travel->hour }}</td>
-                                    <td>{{ $travel->user->name }}</td>
+                                    <td>{{ explode(' ',$travel->user->name )[0] }}</td>
                                     <td class="no-print">
                                         @if (date("Y-m-d") >$travel->date)
                                              @if ( $travel->canceled===1)
-                                            annule definitif
+                                            annule
+
                                             @else
                                               acheve
                                             @endif
@@ -90,9 +89,14 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <div class="btn btn-primary " title="modifier">
-                                        <i class="nav-icon fas fa-edit">voir</i>
-                                         </div>
+                                        <a class="btn btn-primary" href="{{ route('travels.show',$travel->id) }}">
+                                            voir
+                                            </a>
+                                            @if (!(date("Y-m-d") >$travel->date))
+                                            <a class="btn btn-danger" href="{{ route('travels.postpone',$travel->id) }}">
+                                               Reporte
+                                                </a>
+                                                @endif
                                     </td>
                               </tr>
                               @endforeach

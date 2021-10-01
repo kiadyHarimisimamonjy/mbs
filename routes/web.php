@@ -47,6 +47,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('counters', CounterController::class);
     Route::resource('boats', BoatController::class);
     Route::resource('reservations', ReservationController::class);
+    Route::put('/travels/{id}/canceled', [TravelController::class, 'canceled'])
+    ->name('travels.canceled');
+    Route::get('/travels/{id}/manifest', [TravelController::class, 'manifest'])
+    ->name('travels.manifest');
+    Route::get('/travels/{id}/postpone', [TravelController::class, 'postpone'])
+    ->name('travels.postpone');
+    Route::get('/travels/{id}/postponevalidate', [TravelController::class, 'postponevalidate'])
+    ->name('travels.postponevalidate');
     Route::get('/reservations/{id}/editPaid', [ReservationController::class, 'editPaid'])
     ->name('reservations.editPaid');;
     Route::put('/reservations/{id}/paid', [ReservationController::class, 'paid'])

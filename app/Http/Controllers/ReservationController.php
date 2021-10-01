@@ -161,28 +161,17 @@ class ReservationController extends Controller
     public function canceled( $idreservation)
     {
 
-        DB::beginTransaction();
+
         try {
             $reservation = Reservation::find( $idreservation);
-            $reservation->canceled = 1;
-            $reservation->user_id=Auth::user()->id;
-            $reservation->save();
-            $paiements= $reservation->paiements;
-            $sumpaid = array_sum(array_column(json_decode(json_encode($paiements), true),
-            'montant'));
-            $paiedata=array('montant'=>$sumpaid);
-            $cpaiement = new CanceledPaiement($paiedata);
-            $cpaiement->user_id=Auth::user()->id;
-            $counter= Counter:: where('id',Auth::user()->counter_id)->first('id');
-            $cpaiement->counter_id=$counter->id;
-            $cpaiement->reservation()->associate($reservation);
-            $cpaiement->save();
-            DB::commit();
+            DB::transaction(function() use ($reservation) {
+                $reservation->canceled();
+            });
             return redirect()->route('reservations.index')
             ->with('success','Annulation avec success');
         }
         catch (Exception $e) {
-            DB::rollBack();
+
             return back()->withErrors($e->getMessage())->withInput();
         }
     }
@@ -234,11 +223,11 @@ class ReservationController extends Controller
          $reservation=Reservation::find($idreservation) ;
         $itinerary= $reservation->itinerary;
         $paiements= $reservation->paiements;
-
+        $isadmin=User::isAdmin();
         $sumpaid = array_sum(array_column(json_decode(json_encode($paiements), true),
         'montant'));
          $unpaid= $reservation->total-$sumpaid;
-        return view('reservations.paiement',compact('unpaid','sumpaid','itinerary'
+        return view('reservations.paiement',compact('unpaid','sumpaid','itinerary','isadmin'
         ,'reservation',
        'paiements'));
     }
