@@ -10,7 +10,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <h1>Nouvelle Reservation</h1>
+                            <h1>Ouverture De Caisse</h1>
                         </div>
 
                     </div>
@@ -194,7 +194,7 @@
 
                             @endif
 
-                            <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
+                            <a class="btn btn-secondary" href="{{ route('home') }}" > Retour</a>
 
                         </div>
                         <!-- /.card-footer-->

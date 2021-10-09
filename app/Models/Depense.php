@@ -110,10 +110,10 @@ class Depense extends Model
           }
 
           if( $request->input('debut')){
-           $depensetemp = $depensetemp->where('date','>=', $request->input('debut'));
+           $depensetemp = $depensetemp->where('created_at','>=', $request->input('debut'));
           }
           if( $request->input('fin')){
-           $depensetemp = $depensetemp->where('date','<=', $request->input('fin'));
+           $depensetemp = $depensetemp->where('created_at','<=', $request->input('fin'));
           }
           if($isadmin){
                 if( $request->input('nom')  ){
@@ -133,4 +133,3 @@ class Depense extends Model
           return $depenses;
     }
 }
-

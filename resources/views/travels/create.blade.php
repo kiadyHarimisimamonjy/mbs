@@ -119,7 +119,7 @@
 
                                 <div
                                     class="row px-2 pt-1 m-0 align-items-center justify-content-space-between justify-content-center mt-2">
-                                    <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
+                                    <a class="btn btn-secondary" href="{{ route('home') }}" > Retour</a>
 
 
 

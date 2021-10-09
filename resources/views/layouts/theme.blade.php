@@ -255,25 +255,28 @@
                 </a>
 
                 <ul class="nav nav-treeview">
+                      @role('counter')
                   <li class="nav-item">
-                    <a href="../../pages/caisse/ouverture.php" class="nav-link">
+                    <a href="{{ route('checkouts.create') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Ouverture de Caisse</p>
+                      <p>Ouvrir Caisse</p>
                     </a>
                   </li>
+                  @endrole
+
                   <li class="nav-item">
-                    <a href="../../pages/caisse/fermeture.php" class="nav-link">
+                    <a href="{{ route('checkouts.opened') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>
-                        Fermeture de Caisse
+                      Liste Ouverture Caisse
                       </p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../pages/caisse/bilan.php" class="nav-link">
+                    <a href="{{ route('checkouts.closed') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>
-                        Bilan de Caisse
+                     Liste  Fermeture Caisse
                       </p>
                     </a>
                   </li>

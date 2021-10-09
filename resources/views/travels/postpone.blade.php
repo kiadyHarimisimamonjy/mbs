@@ -74,7 +74,7 @@
             <div class="card-footer">
               <button class=" btn btn-primary " type=" submit">Envoyer</button>
 
-              <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
+              <a class="btn btn-secondary" href="{{ route('home') }}" > Retour</a>
 
             </div>
         </form>

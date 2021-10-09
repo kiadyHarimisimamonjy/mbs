@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Depense;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
@@ -10,10 +11,10 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\CounterController;
 use App\Http\Controllers\DepenseController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ItineraryController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\ReservationController;
-use App\Models\Depense;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('depenses', DepenseController::class);
     Route::resource('itineraries', ItineraryController::class);
     Route::resource('travels', TravelController::class);
+    Route::resource('checkouts', CheckoutController::class);
     Route::resource('places', PlaceController::class);
     Route::resource('counters', CounterController::class);
     Route::resource('boats', BoatController::class);
@@ -51,6 +53,25 @@ Route::group(['middleware' => ['auth']], function() {
     ->name('travels.canceled');
     Route::get('/travels/{id}/manifest', [TravelController::class, 'manifest'])
     ->name('travels.manifest');
+     Route::get('checkoutopeneds', [CheckoutController::class, 'opened'])
+     ->name('checkouts.opened');
+      Route::get('checkouts/{id}/openedit', [CheckoutController::class, 'openedit'])
+      ->name('checkouts.openedit');
+       Route::get('checkouts/{id}/{by}/check', [CheckoutController::class, 'check'])
+       ->name('checkouts.check');
+       Route::put('checkouts/{id}/updateopen', [CheckoutController::class, 'updateopen'])
+       ->name('checkoutopens.update');
+
+       Route::get('checkoutcloseds', [CheckoutController::class, 'closed'])
+       ->name('checkouts.closed');
+       Route::put('checkouts/{id}/close', [CheckoutController::class, 'close'])
+       ->name('checkouts.close');
+       Route::put('checkouts/{id}/updateclose', [CheckoutController::class, 'updateclose'])
+       ->name('checkoutcloses.update');
+         Route::get('checkouts/{id}/closeform', [CheckoutController::class, 'closeform'])
+         ->name('checkoutcloses.closeform');
+        Route::get('checkouts/{id}/show', [CheckoutController::class, 'show'])
+        ->name('checkouts.show');
     Route::get('/travels/{id}/postpone', [TravelController::class, 'postpone'])
     ->name('travels.postpone');
     Route::put('/travels/{id}/postponevalidate', [TravelController::class, 'postponevalidate'])

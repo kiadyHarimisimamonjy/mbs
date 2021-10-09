@@ -48,20 +48,23 @@
             <div class="card-body">
 
 
-            <form action="{{ route('depenses.update',$depense->id) }}" method="POST">
+            <form action="{{ route('checkoutopens.update',$checkoutopen->id) }}" method="POST">
                 @csrf
-                @method('PUT')
+                @method('put')
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                <div class="col-12 x">
                   <label for="montant" class="form-label">Montant</label>
-               <input type="number" id="montant" name="montant" value="{{$depense->montant}}"
+                  <input type="number" id="montant" name="montant" value="{{$checkoutopen->montant}}"
                   class="form-control">
                 </div>
                 <div class="col-12">
                   <!-- textarea -->
                   <div class="form-group mt-3">
-                    <label>Description du Motif</label>
-                    <textarea class="form-control" name="commentaire" rows="3" >{{$depense->commentaire}}</textarea>
+                    <label>Remarque</label>
+                    <textarea class="form-control" name="commentaire" rows="3" >
+                            {{$checkoutopen->commentaire}}
+                    </textarea>
                   </div>
                 </div>
                 <div class="col justify-content-right ">
@@ -72,12 +75,10 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                @if ( $depense->user_id===Auth::user()->id && $depense->etat==="en attente")
-    <a class="btn btn-secondary" href="{{ route('home') }}" > Retour</a>
+              <button class=" btn btn-primary " type=" submit">Envoyer</button>
 
-              <input type="submit" name="action" class=" btn btn-primary " value="Modifier">
-              <input type="submit" name="action" class=" btn btn-danger " value="Supprimer">
-              @endif
+              <a href="{{ route('home') }}" > <button  class="btn btn-secondary">Annuler</button></a>
+
             </div>
         </form>
             <!-- /.card-footer-->

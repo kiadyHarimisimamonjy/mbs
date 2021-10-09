@@ -6,7 +6,9 @@ use Exception;
 use App\Models\Boat;
 use App\Models\User;
 use App\Models\Travel;
+use App\Models\Customer;
 use App\Rules\DateCheck;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Itinerary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -101,9 +103,28 @@ class TravelController extends Controller
         $travel = Travel::find( $idtravel);
         return view('travels.postpone',compact('travel'));
     }
-    public function manifest(Travel $travel)
+    public function manifest( $idtravel)
     {
-        //
+     $travel = Travel::find( $idtravel);
+       $customers=Customer::all();//$travel->activecustomers();
+
+
+        $data = [
+
+            'travel' => Travel::find( $idtravel),
+
+            'customers' => Customer::all()
+
+        ];
+
+
+       // $pdf = PDF::loadView('travels.manifest', $data)->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('travels.manifest', $data);
+
+
+
+        return $pdf->download($travel->itinerary->name.'_'.$travel->date);
+        return view('travels.manifest',compact('travel','customers'));
     }
     /**
      * Update the specified resource in storage.

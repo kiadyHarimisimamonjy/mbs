@@ -49,10 +49,10 @@ class Reservation extends Model
             $reservationtemp = $reservationtemp->where('customer','like','%'. $request->input('nom').'%');
            }
           if( $request->input('debut')){
-           $reservationtemp = $reservationtemp->where('date','>=', $request->input('debut'));
+           $reservationtemp = $reservationtemp->where('created_at','>=', $request->input('debut'));
           }
           if( $request->input('fin')){
-           $reservationtemp = $reservationtemp->where('date','<=', $request->input('fin'));
+           $reservationtemp = $reservationtemp->where('created_at','<=', $request->input('fin'));
           }
           $reservations = $reservationtemp->orderBy('created_at', 'DESC')->paginate(5);
           return $reservations;

@@ -96,7 +96,7 @@
 @if (!$isadmin)
 
 <div class="row mt-3  justify-content-center">
-    <a class="btn btn-secondary" href="{{ route('home') }}" > Annuler</a>
+    <a class="btn btn-secondary" href="{{ route('home') }}" > Retour</a>
 
     <button type="submit" class="btn btn-danger">Submit</button>
   </div>
