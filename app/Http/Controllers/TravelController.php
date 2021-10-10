@@ -116,7 +116,7 @@ class TravelController extends Controller
             'customers' => Customer::all()
 
         ];
-
+  //return view('travels.manifest');
 
        // $pdf = PDF::loadView('travels.manifest', $data)->setOptions(['defaultFont' => 'sans-serif']);
         $pdf = PDF::loadView('travels.manifest', $data);
@@ -124,7 +124,7 @@ class TravelController extends Controller
 
 
         return $pdf->download($travel->itinerary->name.'_'.$travel->date);
-        return view('travels.manifest',compact('travel','customers'));
+      //  return view('travels.manifest',compact('travel','customers'));
     }
     /**
      * Update the specified resource in storage.

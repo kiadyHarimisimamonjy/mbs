@@ -170,13 +170,23 @@
 
                                                 </div>
                                                 <!-- cin -->
-                                                <div class="form-group col-5 text-dark">
+                                                <div class="form-group col-3 text-dark">
                                                         <input type="text" id='cin'  placeholder="CIN"   class="cin form-control border-secondary">
 
                                                 </div>
 
                                                 <!-- Contact -->
-                                                <div class="form-group col-1 text-dark mx-auto">
+                                                <div class="form-group col-1 text-dark ">
+                   <input type="number" id='age'  placeholder="Age"   class="age form-control border-secondary">
+
+                                                </div>
+                                                       <div class="form-group col-2 text-dark ">
+                    <select class="sexe col-12 form-control text-center border-secondary"
+                                                id="sexe" name="sexe">
+                            <option>Homme</option>
+                                             <option>Femme</option>
+                                            </select>
+
                                                 </div>
                                         </div>
                                     </div>

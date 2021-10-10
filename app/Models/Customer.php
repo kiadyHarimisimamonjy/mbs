@@ -11,6 +11,8 @@ class Customer extends Model
     protected $fillable = [
         'place_id' ,
         'cin' ,
+        'age' ,
+        'sexe' ,
         'name'
     ];
 
