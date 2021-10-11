@@ -106,17 +106,12 @@ class TravelController extends Controller
     public function manifest( $idtravel)
     {
      $travel = Travel::find( $idtravel);
-       $customers=Customer::all();//$travel->activecustomers();
-
-
         $data = [
-
-            'travel' => Travel::find( $idtravel),
-
-            'customers' => Customer::all()
+            'travel' => $travel,
+            'customers' => $travel->activecustomers(false)
 
         ];
-  //return view('travels.manifest');
+ // return view('travels.manifest',$data);//->setPaper('a4', 'landscape');
 
        // $pdf = PDF::loadView('travels.manifest', $data)->setOptions(['defaultFont' => 'sans-serif']);
         $pdf = PDF::loadView('travels.manifest', $data);
@@ -126,6 +121,24 @@ class TravelController extends Controller
         return $pdf->download($travel->itinerary->name.'_'.$travel->date);
       //  return view('travels.manifest',compact('travel','customers'));
     }
+        public function busmanifest( $idtravel)
+        {
+        $travel = Travel::find( $idtravel);
+       // $customers=$travel->buscustomers();
+        $data = [
+        'travel' => $travel,
+        'customers' => $travel->buscustomers()
+
+        ];
+      //  return view('travels.busmanifest',compact('travel','customers'));//->setPaper('a4', 'landscape');
+
+        $pdf = PDF::loadView('travels.busmanifest', $data)->setPaper('a4', 'landscape');
+
+
+
+        return $pdf->download($travel->itinerary->name.'_'.$travel->date);
+        // return view('travels.manifest',compact('travel','customers'));
+        }
     /**
      * Update the specified resource in storage.
      *

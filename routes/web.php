@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function() {
     ->name('travels.canceled');
     Route::get('/travels/{id}/manifest', [TravelController::class, 'manifest'])
     ->name('travels.manifest');
+      Route::get('/travels/{id}/busmanifest', [TravelController::class, 'busmanifest'])
+      ->name('travels.busmanifest');
      Route::get('checkoutopeneds', [CheckoutController::class, 'opened'])
      ->name('checkouts.opened');
       Route::get('checkouts/{id}/openedit', [CheckoutController::class, 'openedit'])

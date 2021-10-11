@@ -71,7 +71,8 @@
           <div class="card-footer row text-muted">
             <a  target="_blank" href="{{ route('travels.manifest',$travel->id) }}"
             class="btn m-2 btn-info">Manifest</a>
-
+ <a  target="_blank" href="{{ route('travels.busmanifest',$travel->id) }}"
+            class="btn m-2 btn-info">Bus Manifest</a>
 
                  @if ($travel->canceled===0 && $travel->date>=date("Y-m-d") && !$isadmin)
                  <form action="{{ route('travels.canceled',$travel->id) }}" method="POST">

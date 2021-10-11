@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Implement Sticky Header and Footer with CSS</title>
+<title>Manifeste Navire</title>
 <style>
     /* Add some padding on document's body to prevent the content
     to go underneath the header and footer */
     table {
 
-  width: 90%;
+  width: 100%;
   font-size: 13px;
 }
 
@@ -20,10 +20,11 @@ th, td {
 }
 
     .body{
-   padding-left: 20px;
-        margin-top: 50px;
+   padding-left: 15px;
+        margin-top: 70px;
     }
     .fixed-header, .fixed-footer{
+        padding-top:3px;
         width: 100%;
         position: fixed;
 
@@ -37,6 +38,11 @@ th, td {
        float: right;
         width: 50%;
     }
+     .title{
+       text-align: center;
+        width: 100%;
+        font-weight: bold;
+    }
     .fixed-header{
         top: 0;
     }
@@ -49,17 +55,19 @@ th, td {
 </head>
 <body>
     <div class="fixed-header">
+         <div class="title">Liste des passagers</div>
               <div class="left">
-                    Navire: Cap Sainte Marie<br>
-                    Port de Depart: Sonerana
+              Navire: {{$travel->boat->name}}<br>
+                    Port de Depart: {{$travel->itinerary->leaving}}
               </div>
                <div class="right">
-                Date: Cap Sainte Marie<br>
-                    Port de Destination: Sonerana
+               Date: {{$travel->date}}<br>
+                    Port de Destination:  {{$travel->itinerary->arrival}}
               </div>
     </div>
     <div class="body">
         <table>
+
                 <tr>
                       <th>N</th>
                     <th> Nom et prenom</th>
@@ -68,326 +76,18 @@ th, td {
                      <th>Sexe</th>
                      <th>Contact</th>
                 </tr>
-              <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
+    @foreach ( $customers as $customer)
+ <tr>
+                     <td>{{ $loop->iteration }}</td>
+                    <td>{{$customer->name}}</td>
+                    <td>{{$customer->cin}}</td>
+                    <td>{{$customer->age}}</td>
+                    <td>{{$customer->sexe}}</td>
+                    <td>{{$customer->reservation->contact}}</td>
                 </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
-                 <tr>
-                     <td>12</td>
-                    <td>Peter rerere</td>
-                    <td>321 321 2312 321</td>
-                    <td>40</td>
-                     <td>Homme</td>
-                    <td>032 32 320 32</td>
-                </tr>
+
+            @endforeach
+
         </table>
     </div>
     <div class="fixed-footer">

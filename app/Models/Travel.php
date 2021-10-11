@@ -32,13 +32,37 @@ class Travel extends Model
         $reservations=$this->reservations;
         foreach(  $reservations as $reservation) $reservation->canceled();
     }
-    public function activecustomers()
+     public function buscustomers()
+     {
+     try{
+           $search=$this->id;
+             $itinerary_id=$this->itinerary_id;
+           return Customer:: whereHas('reservation', function ($query) use ($search, $itinerary_id) {
+           $query->where('travel_id', $search )->where('canceled',0)->where('itinerary_id',$itinerary_id);
+           })->get();
+
+
+           }
+           catch (Exception $e) {
+           echo($e->getMessage()) ;
+           }
+
+           }
+    public function activecustomers($paginate=true)
     {
         try{
             $search=$this->id;
-            return Customer:: whereHas('reservation', function ($query) use ($search) {
-                $query->where('travel_id', $search )->where('canceled',0);
-        })->paginate(5);
+            if ($paginate){
+                  return Customer:: whereHas('reservation', function ($query) use ($search) {
+                  $query->where('travel_id', $search )->where('canceled',0);
+                  })->paginate(5);
+            }
+            else{
+                  return Customer:: whereHas('reservation', function ($query) use ($search) {
+                  $query->where('travel_id', $search )->where('canceled',0);
+                  })->get();
+            }
+
         }
         catch (Exception $e) {
            echo($e->getMessage()) ;
