@@ -6,12 +6,14 @@ use Exception;
 use App\Models\Boat;
 use App\Models\User;
 use App\Models\Travel;
+use App\Models\Counter;
 use App\Models\Customer;
 use App\Rules\DateCheck;
-use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Itinerary;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TravelController extends Controller
 {
@@ -38,7 +40,8 @@ class TravelController extends Controller
      */
     public function create()
     {
-        $itineraries = Itinerary::where('show','>', 0)->get();
+         $itineraries =  Itinerary::where('show','>', 0)->get();
+
         $boats = Boat::where('enable', 1)->get();
         return view('travels.create',compact('itineraries','boats'));
     }
@@ -76,6 +79,7 @@ class TravelController extends Controller
     {
         $isadmin = User::isAdmin();
         $customers=$travel->activecustomers();
+
         return view('travels.show',compact('travel','customers','isadmin'));
        // ->with('i', (request()->input('page', 1) - 1) * 5);
      //   dd($travel->reservationispaid());

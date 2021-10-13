@@ -205,7 +205,7 @@
                              @csrf
                              @method('PUT')
 
-                             <button type="submit" class="btn btn-danger m-2">Annuler</button>
+                             <button type="submit" class="btn btn-danger m-2">Annuler Reservation</button>
 
                             </form>
                             @endif

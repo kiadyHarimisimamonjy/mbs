@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MSB tools | Voyage</title>
+    <title> Cap St Marie</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="http://127.0.0.1:8000/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-boxed">
+<body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -96,7 +96,7 @@
       <aside class="main-sidebar sidebar-dark-secondary elevation-4">
         <!-- Brand Logo -->
         <a href="../../index.php" class="brand-link text-center">
-          <span class="brand-text font-weight-bold fst-italic">MSB tools</span>
+          <span class="brand-text font-weight-bold fst-italic">Cap St Marie</span>
           <i class="nav-icon fas  fa-tools"></i>
         </a>
 
@@ -105,7 +105,7 @@
 
 
           <!-- Sidebar Menu -->
-          <nav class="mt-4">
+          <nav class="mt-4" role='navigation'>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
@@ -118,9 +118,8 @@
                 </a>
               </li>
 
-
-
-              <li class="nav-item">
+              @if (Auth::user()->name==='Kiady')
+                  <li class="nav-item">
                 <a href="#" class="nav-link">
                   <!-- <i class="nav-icon fas fa-edit"></i> -->
                   <p>
@@ -164,6 +163,9 @@
 
                 </ul>
               </li>
+              @endif
+
+               @if (Auth::user()->name!=='Cloteur')
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <!-- <i class="nav-icon fas fa-copy"></i> -->
@@ -191,7 +193,7 @@
 
                 </ul>
               </li>
-
+                @endif
 
               <li class="nav-item">
                 <a href="#" class="nav-link">

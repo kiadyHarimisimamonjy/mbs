@@ -32,7 +32,7 @@
       @endif
           <div class="card">
             <div class="card-header bg-primary">
-              <h3 class="card-title">Formulaire</h3>
+              <h3 class="card-title">Ouverture de caisse</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">

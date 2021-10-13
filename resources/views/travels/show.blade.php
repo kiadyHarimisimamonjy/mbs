@@ -35,6 +35,9 @@
             <div class="col-12 text-center fs-6">
                 <b> Paiement: </b>{{$travel->reservationispaid()}}
             </div>
+            <div class="col-12 text-center fs-6">
+                <b>place Restant: </b>{{count($travel->boat->places)-count($customers)}}
+            </div>
           </div><!-- /.col -->
     </div>
   </section>
@@ -79,7 +82,7 @@
                  @csrf
                  @method('PUT')
 
-                 <button type="submit" class="btn btn-danger m-2">Annuler</button>
+                 <button type="submit" class="btn btn-danger m-2">Annuler Voyage</button>
 
                 </form>
                 @endif
