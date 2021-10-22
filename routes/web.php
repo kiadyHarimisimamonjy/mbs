@@ -65,7 +65,6 @@ Route::group(['middleware' => ['auth']], function () {
         ->name('checkouts.check');
     Route::put('checkouts/{id}/updateopen', [CheckoutController::class, 'updateopen'])
         ->name('checkoutopens.update');
-
     Route::get('checkoutcloseds', [CheckoutController::class, 'closed'])
         ->name('checkouts.closed');
     Route::put('checkouts/{id}/close', [CheckoutController::class, 'close'])
@@ -81,7 +80,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/travels/{id}/postponevalidate', [TravelController::class, 'postponevalidate'])
         ->name('travels.postponevalidate');
     Route::get('/reservations/{id}/editPaid', [ReservationController::class, 'editPaid'])
-        ->name('reservations.editPaid');;
+        ->name('reservations.editPaid');
     Route::put('/reservations/{id}/paid', [ReservationController::class, 'paid'])
         ->name('reservations.paid');
     Route::put('/reservations/{id}/canceled', [ReservationController::class, 'canceled'])

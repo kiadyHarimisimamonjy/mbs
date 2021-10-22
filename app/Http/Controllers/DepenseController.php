@@ -20,10 +20,8 @@ class DepenseController extends Controller
     public function index(Request $request)
     {
         $isadmin = User::isAdmin();
-       $depenses= Depense::getDepenses($request,$isadmin);
-
-
-      return view('depenses.index',compact('depenses','isadmin'))
+        $depenses = Depense::getDepenses($request, $isadmin);
+        return view('depenses.index', compact('depenses', 'isadmin'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
         //
     }
@@ -35,9 +33,9 @@ class DepenseController extends Controller
      */
     public function create()
     {
-        $counters=Counter::all();
+        $counters = Counter::all();
         $isadmin = User::isAdmin();
-        return view('depenses.create',compact('counters','isadmin'));
+        return view('depenses.create', compact('counters', 'isadmin'));
         //
     }
 
@@ -56,16 +54,15 @@ class DepenseController extends Controller
         ]);
         $depense = new Depense($request->all());
         $isadmin = User::isAdmin();
-        if( $isadmin){
+        if ($isadmin) {
             $depense->saveAndApprouved();
-        }
-        else{
-            $counter= Counter:: where('id',Auth::user()->counter_id)->first('id');
-            $depense->counter_id=$counter->id;
+        } else {
+            $counter = Counter::where('id', Auth::user()->counter_id)->first('id');
+            $depense->counter_id = $counter->id;
             $depense->save();
-                }
+        }
         return redirect()->route('depenses.index')
-                        ->with('success','Product created successfully.');
+            ->with('success', 'Product created successfully.');
     }
 
     /**
@@ -78,7 +75,7 @@ class DepenseController extends Controller
     {
 
         $isadmin = User::isAdmin();
-        return view('depenses.show',compact('depense','isadmin'));
+        return view('depenses.show', compact('depense', 'isadmin'));
     }
 
     /**
@@ -90,19 +87,19 @@ class DepenseController extends Controller
     public function edit(Depense $depense)
     {
 
-        return view('depenses.edit',compact('depense'));
+        return view('depenses.edit', compact('depense'));
         //
     }
     public function action(Request $request,  $iddepense)
     {
-            request()->validate([
+        request()->validate([
             'montant' => 'required|integer|gt:0',
         ]);
-        $depense = Depense::find( $iddepense);
+        $depense = Depense::find($iddepense);
         //dd($depense);
         $depense->action($request);
         return redirect()->route('depenses.index')
-        ->with('success','Boat updated successfully');
+            ->with('success', 'Boat updated successfully');
     }
     /**
      * Update the specified resource in storage.
@@ -114,24 +111,20 @@ class DepenseController extends Controller
     public function update(Request $request, Depense $depense)
     {
 
-            request()->validate([
-                'montant' => 'required|integer|gt:0',
-                'commentaire' => 'required',
-            ]);
-        if($request->input('action')==='Modifier'){
-            $array=array('montant'=>$request->input('montant'),'commentaire'=>$request->input('commentaire'));
+        request()->validate([
+            'montant' => 'required|integer|gt:0',
+            'commentaire' => 'required',
+        ]);
+        if ($request->input('action') === 'Modifier') {
+            $array = array('montant' => $request->input('montant'), 'commentaire' => $request->input('commentaire'));
             $depense->update($array);
-
-        }
-        elseif($request->input('action')==='Supprimer'){
-            $depense->canceled=1;
+        } elseif ($request->input('action') === 'Supprimer') {
+            $depense->canceled = 1;
 
             $depense->save();
-
-
         }
         return redirect()->route('depenses.index')
-                            ->with('success','Boat updated successfully');
+            ->with('success', 'Boat updated successfully');
         //
     }
 

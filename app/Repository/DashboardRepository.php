@@ -3,10 +3,13 @@
 namespace App\Repository;
 
 use App\Model\User;
+use App\Models\Travel;
 use App\Models\Checkout;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Contract\DashboardRepositoryInterface;
+use App\Models\Customer;
 
 class DashboardRepository implements DashboardRepositoryInterface
 {
@@ -22,6 +25,12 @@ class DashboardRepository implements DashboardRepositoryInterface
   }
   public function getCountCustomer()
   {
+    $travels = (Travel::where('date', Carbon::today())->get());
+    $count = 0;
+    foreach ($travels as $travel) {
+      $count +=  count($travel->customers);
+    }
+    return $count;
   }
   public function  getGraphOne()
   {
